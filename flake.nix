@@ -32,22 +32,28 @@
       in rec {
 
         packages = {
-          # foo-vm is the package name
-          foo-vm = nixos-generators.nixosGenerate {
+          # linux is the package name
+          linux = nixos-generators.nixosGenerate {
             inherit pkgs;
             # Add any extra files you wish to use for configuration
             # NOTE: They must be added to git with `git add ./path/to/file`
             # otherwise the nix flake will not see them as it uses 
             # the git state to track source hashes
-            modules = [ ./machines/foo/configuration.nix ];
+            modules = [ ./machines/linux/configuration.nix ];
             format = "vm";
           };
 
-          # bar-vm is the package name
-          bar-vm = nixos-generators.nixosGenerate {
+          # macos is the package name
+          macos = nixos-generators.nixosGenerate {
             inherit pkgs;
-            modules = [ ./machines/bar/configuration.nix ];
+            modules = [ ./machines/macos/configuration.nix ];
+            format = "virtualbox";
+          };
 
+           # windows is the package name
+          windows = nixos-generators.nixosGenerate {
+            inherit pkgs;
+            modules = [ ./machines/windows/configuration.nix ];
             format = "virtualbox";
           };
         };
